@@ -1,0 +1,63 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd">
+    <bean id="a1" class="org.example.models.Address">
+        <property name="city" value="HCM"></property>
+        <property name="country" value="VN"></property>
+        <property name="state" value="GoVap"></property>
+    </bean>
+    <bean id="a2" class="org.example.models.Address">
+        <property name="city" value="HCM"></property>
+        <property name="country" value="VN"></property>
+        <property name="state" value="Binh Thanh"></property>
+    </bean>
+
+    <bean id="e1" class="org.example.models.Employee">
+        <property name="id" value="1"></property>
+        <property name="name" value="Ngoc Bich"></property>
+        <property name="address" ref="a1"></property>
+    </bean>
+    <bean id="p" class="org.example.models.Person">
+        <property name="name" value="Person Ngoc Bich"></property>
+        <property name="addresses">
+            <list>
+                <ref bean="a1"></ref>
+                <ref bean="a2"></ref>
+            </list>
+        </property>
+        <property name="emails">
+            <list>
+                <value>bich1@gmail.com</value>
+                <value>bich2@gmail.com</value>
+            </list>
+        </property>
+    </bean>
+    <bean id="pts" class="org.springframework.beans.factory.config.PropertyPlaceholderConfigurer">
+        <property name="locations">
+            <list>
+                <value>classpath:sample.properties</value>
+            </list>
+        </property>
+        <property name="ignoreResourceNotFound" value="true"></property>
+        <property name="ignoreUnresolvablePlaceholders" value="true"></property>
+    </bean>
+
+    <bean id="lop" class="org.example.models.Lop">
+        <property name="classId" value="KTPM"></property>
+        <property name="className" value="${ten_lop}"></property>
+    </bean>
+
+    <bean id="faculty" class="org.example.models.Faculty">
+        <property name="name" value="Faculty of Information"></property>
+    </bean>
+
+    <bean id="dep1" class="org.example.models.Department" autowire="byName">
+        <property name="d_name" value="SE"></property>
+    </bean>
+
+    <bean id="dep2" class="org.example.models.Department" autowire="no">
+        <property name="d_name" value="CS"></property>
+        <property name="faculty" ref="faculty"></property>
+    </bean>
+</beans>
